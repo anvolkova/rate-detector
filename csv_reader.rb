@@ -2,6 +2,7 @@ require 'csv'
 require 'time'
 require './meter_reading.rb'
 
+# CsvReader reads a sequence of meter readings from a CSV file.
 class CsvReader
     def read(filename)
         readings = []

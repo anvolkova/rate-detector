@@ -1,3 +1,4 @@
+# MeterReading represents volume at a given timestamp.
 class MeterReading
     attr_reader :timestamp, :volume
 

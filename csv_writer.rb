@@ -1,7 +1,7 @@
 require 'csv'
 
+# CsvWriter writes a sequence of intervals in CSV format.
 class CsvWriter
-
     def write(intervals)
         CSV.generate do |csv|
             csv << ["Start Timestamp", "End Timestamp", "Start Volume", "End Volume"]

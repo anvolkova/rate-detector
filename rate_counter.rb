@@ -1,3 +1,5 @@
+# RateCounter finds the periods of time when the volume
+# changes at a rate greater than a user defined volume.
 class RateCounter
     def solve(readings, rate_of_change)
         reading_prev = readings[0]
