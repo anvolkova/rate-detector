@@ -20,7 +20,7 @@ EOF
         test_file.unlink
     end
 
-    it "should read CSV file in the given format" do
+    it 'should read CSV file in the given format' do
         readings = csv_reader.read(test_file)
         expect(readings).to match_array([
             have_attributes(timestamp: Time.new(2019, 4, 29, 10, 3, 0), volume: 9100),

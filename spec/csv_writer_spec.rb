@@ -10,7 +10,7 @@ describe CsvWriter do
         MeterReading.new(Time.new(2022, 10, 31, 10, 4, 0), 9400)]]
     end
 
-    it "should generate the output CSV in the given format" do
+    it 'should generate the output CSV in the given format' do
         output = csv_writer.write(intervals)
         expect(output).to eq <<EOF
 Start Timestamp,End Timestamp,Start Volume,End Volume

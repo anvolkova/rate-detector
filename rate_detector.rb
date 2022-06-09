@@ -5,6 +5,7 @@ require './rate_counter.rb'
 # Reading input parameters.
 csv_file = ARGV[0]
 rate_of_change = ARGV[1].to_i
+# TODO check if input is correct for the rate_of_change
 
 begin
     readings = CsvReader.new.read(csv_file)

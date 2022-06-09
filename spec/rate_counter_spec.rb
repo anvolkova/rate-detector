@@ -6,14 +6,25 @@ describe RateCounter do
     let(:rate_counter) { RateCounter.new }
     let(:rate_of_change) { 100 }
 
-    context "when the volume changes at a rate greater than a user defined rate" do
+    context 'when there is not enough data in the file or file is empty' do
+        let(:empty_readings) do
+            [MeterReading.new(Time.new(2019, 4, 29, 10, 3, 0), 9100)]
+        end
+
+        it 'returns the empty array' do
+            intervals = rate_counter.solve(empty_readings, rate_of_change)
+            expect(intervals).to be_empty
+        end
+    end
+
+    context 'when the volume changes at a rate greater than a user defined rate' do
         let(:readings) do
             [MeterReading.new(Time.new(2019, 4, 29, 10, 3, 0), 9100),
             MeterReading.new(Time.new(2019, 4, 29, 10, 4, 0), 9400),
             MeterReading.new(Time.new(2019, 4, 29, 10, 15, 30), 10200)]
         end
 
-        it "finds the intervals" do
+        it 'finds the intervals' do
             intervals = rate_counter.solve(readings, rate_of_change)
             expect(intervals).to match_array([[
                 have_attributes(timestamp: Time.new(2019, 4, 29, 10, 3, 0), volume: 9100),
@@ -22,14 +33,14 @@ describe RateCounter do
         end
     end
 
-    context "when there are consecutive groups of entries that meet the rate of change criteria" do
+    context 'when there are consecutive groups of entries that meet the rate of change criteria' do
         let(:merge_readings) do
             [MeterReading.new(Time.new(2019, 4, 29, 10, 3, 0), 9100),
             MeterReading.new(Time.new(2019, 4, 29, 10, 4, 0), 9400),
             MeterReading.new(Time.new(2019, 4, 29, 10, 10, 0), 10600)]
         end
 
-        it "merges the intervals" do
+        it 'merges the intervals' do
             intervals = rate_counter.solve(merge_readings, rate_of_change)
             expect(intervals).to match_array([[
                 have_attributes(timestamp: Time.new(2019, 4, 29, 10, 3, 0), volume: 9100),

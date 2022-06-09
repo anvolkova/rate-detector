@@ -7,7 +7,7 @@ describe MeterReading do
             MeterReading.new(Time.new(2022, 10, 31, 2, 2, 2), 100)
         end
 
-        it "should initialize the object" do
+        it 'should initialize the object' do
             expect(reading.timestamp).to eq Time.new(2022, 10, 31, 2, 2, 2)
             expect(reading.volume).to eq 100
         end
